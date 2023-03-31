@@ -1,7 +1,9 @@
-import React, { useState } from "react"
-import { Field, Form, Formik, FormikConfig, FormikValues } from "formik"
+"use client"
+
+import React from "react"
+import { Field } from "formik"
 import { Inter } from "next/font/google"
-import { boolean, mixed, number, object } from "yup"
+import { mixed, object } from "yup"
 import { FormikStepper } from "./components/FormikStepper"
 import { FormikStep } from "./components/FormikStep"
 
@@ -26,32 +28,23 @@ export default function Home() {
       >
         <FormikStep label="Personal Data">
           <div style={{ paddingBottom: 2 }}>
-            <Field fullWidth name="firstName" label="First Name" />
+            <Field fullwidth="true" name="firstName" label="First Name" />
           </div>
           <div>
-            <Field fullWidth name="lastName" label="Last Name" />
+            <Field fullwidth="true" name="lastName" label="Last Name" />
           </div>
           <div>
             <Field
               name="millionaire"
               type="checkbox"
-              Label={{ label: "I am a millionaire" }}
+              label={{ label: "I am a millionaire" }}
             />
           </div>
         </FormikStep>
         <FormikStep
           label="Bank Accounts"
           validationSchema={object({
-            money: mixed().when("millionaire", {
-              is: true,
-              then: number()
-                .required()
-                .min(
-                  1_000_000,
-                  "Because you said you are a millionaire you need to have 1 million"
-                ),
-              otherwise: number().required(),
-            }),
+            money: mixed().required(),
           })}
         >
           <div style={{ paddingBottom: 2 }}>

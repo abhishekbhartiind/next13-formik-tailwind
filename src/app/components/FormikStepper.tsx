@@ -1,6 +1,7 @@
-import { Form, Field, Formik, FormikConfig, FormikValues } from "formik"
+import { Form, Formik, FormikConfig, FormikValues } from "formik"
 import { FormikStepProps } from "../interfaces"
 import React, { useState } from "react"
+import Stepper from "../components/Stepper"
 
 export function FormikStepper({
   children,
@@ -45,7 +46,12 @@ export function FormikStepper({
     >
       {({ isSubmitting }) => (
         <Form autoComplete="off">
-          <Stepper alternativeLabel activeStep={step}>
+          <Stepper
+            childrenArray={childrenArray}
+            currentStep={step}
+            completed={completed}
+          />
+          {/* <Stepper alternativeLabel activeStep={step}>
             {childrenArray.map((child, index) => (
               <Step
                 key={child.props.label}
@@ -54,36 +60,32 @@ export function FormikStepper({
                 <label>{child.props.label}</label>
               </Step>
             ))}
-          </Stepper>
+          </Stepper> */}
 
           {currentChild}
 
           <div className="container p-4">
             {step > 0 ? (
-              <Grid item>
-                <Button
+              <div>
+                <button
                   disabled={isSubmitting}
-                  variant="contained"
-                  color="primary"
+                  className="btn"
                   onClick={() => setStep((s) => s - 1)}
                 >
                   Back
-                </Button>
-              </Grid>
+                </button>
+              </div>
             ) : null}
-            <Grid item>
+            <div>
               <button
-                startIcon={
-                  isSubmitting ? <CircularProgress size="1rem" /> : null
-                }
+                className="btn"
                 disabled={isSubmitting}
-                variant="contained"
                 color="primary"
                 type="submit"
               >
                 {isSubmitting ? "Submitting" : isLastStep() ? "Submit" : "Next"}
               </button>
-            </Grid>
+            </div>
           </div>
         </Form>
       )}
