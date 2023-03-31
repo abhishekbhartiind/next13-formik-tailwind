@@ -28,15 +28,26 @@ export default function Home() {
       >
         <FormikStep label="Personal Data">
           <div style={{ paddingBottom: 2 }}>
-            <Field fullwidth="true" name="firstName" label="First Name" />
+            <Field
+              fullwidth="true"
+              name="firstName"
+              components={<input type="text" />}
+              label="First Name"
+            />
           </div>
           <div>
-            <Field fullwidth="true" name="lastName" label="Last Name" />
+            <Field
+              fullwidth="true"
+              components={<input type="text" />}
+              name="lastName"
+              label="Last Name"
+            />
           </div>
           <div>
             <Field
               name="millionaire"
               type="checkbox"
+              components={<input type="checkbox" />}
               label={{ label: "I am a millionaire" }}
             />
           </div>
@@ -52,13 +63,19 @@ export default function Home() {
               fullWidth
               name="money"
               type="number"
+              components={<input type="number" />}
               label="All the money I have"
             />
           </div>
         </FormikStep>
         <FormikStep label="More Info">
           <div style={{ paddingBottom: 2 }}>
-            <Field fullWidth name="description" label="Description" />
+            <Field
+              fullWidth
+              name="description"
+              components={<textarea />}
+              label="Description"
+            />
           </div>
         </FormikStep>
       </FormikStepper>
