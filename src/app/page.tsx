@@ -1,54 +1,77 @@
-import Image from "next/image"
+import React, { useState } from "react"
+import { Field, Form, Formik, FormikConfig, FormikValues } from "formik"
 import { Inter } from "next/font/google"
-import styles from "./page.module.css"
+import { boolean, mixed, number, object } from "yup"
+import { FormikStepper } from "./components/FormikStepper"
+import { FormikStep } from "./components/FormikStep"
 
 const inter = Inter({ subsets: ["latin"] })
+const sleep = (time: number) => new Promise((acc) => setTimeout(acc, time))
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p className="mx-auto text-gray-400">
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <main>
+      <FormikStepper
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          millionaire: false,
+          money: 0,
+          description: "",
+        }}
+        onSubmit={async (values) => {
+          await sleep(3000)
+          console.log("values", values)
+        }}
+      >
+        <FormikStep label="Personal Data">
+          <div style={{ paddingBottom: 2 }}>
+            <Field fullWidth name="firstName" label="First Name" />
+          </div>
+          <div>
+            <Field fullWidth name="lastName" label="Last Name" />
+          </div>
+          <div>
+            <Field
+              name="millionaire"
+              type="checkbox"
+              Label={{ label: "I am a millionaire" }}
             />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
+          </div>
+        </FormikStep>
+        <FormikStep
+          label="Bank Accounts"
+          validationSchema={object({
+            money: mixed().when("millionaire", {
+              is: true,
+              then: number()
+                .required()
+                .min(
+                  1_000_000,
+                  "Because you said you are a millionaire you need to have 1 million"
+                ),
+              otherwise: number().required(),
+            }),
+          })}
+        >
+          <div style={{ paddingBottom: 2 }}>
+            <Field
+              fullWidth
+              name="money"
+              type="number"
+              label="All the money I have"
+            />
+          </div>
+        </FormikStep>
+        <FormikStep label="More Info">
+          <div style={{ paddingBottom: 2 }}>
+            <Field fullWidth name="description" label="Description" />
+          </div>
+        </FormikStep>
+      </FormikStepper>
+      <div>
         <a
           href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -62,7 +85,6 @@ export default function Home() {
 
         <a
           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -74,7 +96,6 @@ export default function Home() {
 
         <a
           href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
