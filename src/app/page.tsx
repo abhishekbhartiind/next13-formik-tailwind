@@ -2,12 +2,10 @@
 
 import React from "react"
 import { Field } from "formik"
-import { Inter } from "next/font/google"
 import { mixed, object } from "yup"
 import { FormikStepper } from "./components/FormikStepper"
 import { FormikStep } from "./components/FormikStep"
 
-const inter = Inter({ subsets: ["latin"] })
 const sleep = (time: number) => new Promise((acc) => setTimeout(acc, time))
 
 export default function Home() {
@@ -31,14 +29,14 @@ export default function Home() {
             <Field
               fullwidth="true"
               name="firstName"
-              components={<input type="text" />}
+              components={<input type="text" placeholder="First Name" />}
               label="First Name"
             />
           </div>
           <div>
             <Field
               fullwidth="true"
-              components={<input type="text" />}
+              components={<input type="text" placeholder="Last Name" />}
               name="lastName"
               label="Last Name"
             />
@@ -79,44 +77,6 @@ export default function Home() {
           </div>
         </FormikStep>
       </FormikStepper>
-      <div>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
     </main>
   )
 }
