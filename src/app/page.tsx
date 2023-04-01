@@ -10,7 +10,7 @@ const sleep = (time: number) => new Promise((acc) => setTimeout(acc, time))
 
 export default function Home() {
   return (
-    <main>
+    <main className="container p-4">
       <FormikStepper
         initialValues={{
           firstName: "",
@@ -29,24 +29,24 @@ export default function Home() {
             <Field
               fullwidth="true"
               name="firstName"
-              components={<input type="text" placeholder="First Name" />}
               label="First Name"
+              placeholder="First Name"
             />
           </div>
           <div>
             <Field
               fullwidth="true"
-              components={<input type="text" placeholder="Last Name" />}
               name="lastName"
               label="Last Name"
+              placeholder="Last Name"
             />
           </div>
           <div>
             <Field
               name="millionaire"
               type="checkbox"
-              components={<input type="checkbox" />}
               label={{ label: "I am a millionaire" }}
+              placeholder="I am a millionare"
             />
           </div>
         </FormikStep>
@@ -61,8 +61,8 @@ export default function Home() {
               fullwidth="true"
               name="money"
               type="number"
-              components={<input type="number" />}
               label="All the money I have"
+              placeholder="Money"
             />
           </div>
         </FormikStep>
@@ -71,8 +71,8 @@ export default function Home() {
             <Field
               fullwidth="true"
               name="description"
-              components={<textarea />}
               label="Description"
+              placeholder="Description"
             />
           </div>
         </FormikStep>
