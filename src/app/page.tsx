@@ -60,7 +60,7 @@ export default function Home() {
         >
           <div style={{ paddingBottom: 2 }}>
             <Field
-              fullWidth
+              fullwidth="true"
               name="money"
               type="number"
               components={<input type="number" />}
@@ -71,7 +71,7 @@ export default function Home() {
         <FormikStep label="More Info">
           <div style={{ paddingBottom: 2 }}>
             <Field
-              fullWidth
+              fullwidth="true"
               name="description"
               components={<textarea />}
               label="Description"
